@@ -34,5 +34,5 @@
 	
 	};
 
-	window.logic = new Logic;
+	window.logic = new Logic();
 })();

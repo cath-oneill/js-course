@@ -1,15 +1,25 @@
-beforeEach(function () {
-  jasmine.addMatchers({
-    toBePlaying: function () {
-      return {
-        compare: function (actual, expected) {
-          var player = actual;
-
-          return {
-            pass: player.currentlyPlayingSong === expected && player.isPlaying
-          }
-        }
-      };
-    }
-  });
+beforeEach(function() {
+             
+  bakery = {
+    supplies: {
+      flour: 4,
+      eggs: 12,
+      sugar: 17,
+      spice: 5
+    },
+    ingredients: {
+      cupcake: {
+        flour: 2,
+        eggs: 1,
+        sugar: 1
+      },
+      cookie: {
+        flour: 0.5,
+        eggs: 1,
+        sugar: 0.5,
+        spice: 0.5
+      },
+    },
+      money: 1000
+  }
 });

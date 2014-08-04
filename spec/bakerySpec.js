@@ -41,7 +41,7 @@ describe("Logic......................", function() {
 			expect(bakery.supplies.flour).toEqual(0);
 		});
 
-    	it("should subtract the correct amount from each supply when an item is made", function() {
+    	it("subtracts the correct amount from each supply when an item is made", function() {
     		logic.make("cookie");
     		expect(bakery.supplies.flour).toEqual(3.5);
     		expect(bakery.supplies.eggs).toEqual(11);
@@ -49,7 +49,7 @@ describe("Logic......................", function() {
     		expect(bakery.supplies.spice).toEqual(4.5);
     	});
 
-    	it("should not change the supply level if an ingredient is not used in a recipe", function() {
+    	it("does not change the supply level if an ingredient is not used in a recipe", function() {
     		expect(bakery.supplies.spice).toEqual(5);
     		logic.make("cupcake");
     		expect(bakery.supplies.spice).toEqual(5);

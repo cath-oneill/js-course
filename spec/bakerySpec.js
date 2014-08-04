@@ -23,23 +23,36 @@ describe("Logic......................", function() {
 	    });
 	});
 
-	xit("tells the current song if the user has made it a favorite", function() {
-	    spyOn(song, 'persistFavoriteStatus');
+	describe("make function", function() {
+		it("returns false if there are insufficient supplies to make an item", function() {
+			logic.make("cupcake");
+			var sufficientSupplies = logic.make("cupcake");
+			var insufficientSupplies = logic.make("cupcake");
+			expect(sufficientSupplies).toEqual(true);
+			expect(insufficientSupplies).toEqual(false);
+		});
 
-	    player.play(song);
-	    player.makeFavorite();
+		it("does not allow supplies to fall below 0", function() {
+			logic.make("cupcake");
+			expect(bakery.supplies.flour).toEqual(2);
+			var sufficientSupplies = logic.make("cupcake");
+			expect(bakery.supplies.flour).toEqual(0);
+			var insufficientSupplies = logic.make("cupcake");
+			expect(bakery.supplies.flour).toEqual(0);
+		});
 
-	    expect(song.persistFavoriteStatus).toHaveBeenCalledWith(true);
+    	it("should subtract the correct amount from each supply when an item is made", function() {
+    		logic.make("cookie");
+    		expect(bakery.supplies.flour).toEqual(3.5);
+    		expect(bakery.supplies.eggs).toEqual(11);
+    		expect(bakery.supplies.sugar).toEqual(16.5);
+    		expect(bakery.supplies.spice).toEqual(4.5);
+    	});
+
+    	it("should not change the supply level if an ingredient is not used in a recipe", function() {
+    		expect(bakery.supplies.spice).toEqual(5);
+    		logic.make("cupcake");
+    		expect(bakery.supplies.spice).toEqual(5);
+    	});
 	});
-
-  //demonstrates use of expected exceptions
-  describe("#resume", function() {
-    xit("should throw an exception if song is already playing", function() {
-      player.play(song);
-
-      expect(function() {
-        player.resume();
-      }).toThrowError("song is already playing");
-    });
-  });
 });
